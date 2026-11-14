@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>Cut Signal - TikTok sign-in</title>
+<style>
+body{font-family:system-ui,sans-serif;background:#101418;color:#eee;display:grid;place-items:center;min-height:100vh;margin:0}
+main{max-width:34rem;padding:2rem;background:#1b2430;border-radius:1rem}
+a{color:#25f4ee}code{word-break:break-all}
+</style>
+</head>
+<body>
+<main>
+<h1>Returning to Cut Signal...</h1>
+<p id="msg">Sending your TikTok sign-in back to the dashboard on this PC.</p>
+<p><a id="go" href="#">Continue to the dashboard</a></p>
+</main>
+<script>
+const q = window.location.search;
+const target = "http://localhost:8765/callback" + q;
+const go = document.getElementById("go");
+go.href = target;
+if (new URLSearchParams(q).has("error")) {
+  document.getElementById("msg").textContent = "TikTok reported an error. Continue to see it in the dashboard.";
+}
+if (q) { window.location.replace(target); }
+else { document.getElementById("msg").textContent = "This page only handles TikTok sign-in redirects for the Cut Signal dashboard."; go.remove(); }
+</script>
+</body>
+</html>
